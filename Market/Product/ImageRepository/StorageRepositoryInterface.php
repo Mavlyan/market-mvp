@@ -1,6 +1,6 @@
 <?php
 
-namespace Market\Product\Image;
+namespace Market\Product\ImageRepository;
 
 interface StorageRepositoryInterface
 {

@@ -1,8 +1,9 @@
 <?php
 
 namespace Market\Product\Image;
+namespace Market\Product\ImageRepository;
 /**
- * Repository for Market's filesystem and static storage.
+ * Repository for AWS S3 storage.
  */
 final class AwsS3StorageRepository implements StorageRepositoryInterface
 {

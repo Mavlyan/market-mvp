@@ -1,6 +1,6 @@
 <?php
 
-namespace Market\Product\Image;
+namespace Market\Product\ImageRepository;
 /**
  * Repository for Market's filesystem and static storage.
  */
