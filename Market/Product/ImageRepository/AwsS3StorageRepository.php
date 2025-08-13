@@ -1,7 +1,9 @@
 <?php
 
-namespace Market\Product\Image;
 namespace Market\Product\ImageRepository;
+
+use \AwsS3\Client\AwsStorageInterface;
+
 /**
  * Repository for AWS S3 storage.
  */
