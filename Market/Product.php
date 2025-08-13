@@ -10,7 +10,9 @@ class Product
 {
     private ImageRepository $storage;
 
-    private string $imageFileName;
+    private string $mainImageFileName;
+
+    private array $additionalImagesFileNames;
 
     public function __construct(ImageRepository $fileStorageRepository)
     {
@@ -20,30 +22,57 @@ class Product
     /**
      * Returns product image URL.
      */
-    public function getImageUrl(): ?string
+    public function getMainImageUrl(): ?string
     {
-        if ($this->storage->fileExists($this->imageFileName) !== true) {
-            return null;
-        }
-        return $this->storage->getUrl($this->imageFileName);
+        return $this->storage->getUrl($this->mainImageFileName);
     }
 
     /**
-     * Returns whether image was successfully updated or not.
+     * Returns product image URL.
      */
-    public function updateImage(): bool
+    public function getAdditionalImagesUrls(): array
+    {
+        $urls = [];
+        foreach ($this->additionalImagesFileNames as $fileName) {
+            $urls[] = $this->storage->getUrl($fileName);
+        }
+
+        return array_filter($urls);
+    }
+
+    /**
+     * Returns whether main image was successfully updated or not.
+     */
+    public function updateMainImage(): bool
     {
         /*...*/
         try {
-
-            if ($this->storage->fileExists($this->imageFileName) !== true) {
-                $this->storage->deleteFile($this->imageFileName);
-            }
-            $this->storage->saveFile($this->imageFileName);
-        } catch (\Exception $exception) {
+            $this->storage->deleteFile($this->mainImageFileName);
+            $this->storage->saveFile($this->mainImageFileName);
+        } catch (\Exception) {
             /*...*/
             return false;
         }
+        /*...*/
+        return true;
+    }
+
+    /**
+     * Returns whether additional images were successfully updated or not.
+     */
+    public function updateAdditionalImages(): bool
+    {
+        /*...*/
+        foreach ($this->additionalImagesFileNames as $fileName) {
+            try {
+                $this->storage->deleteFile($fileName);
+                $this->storage->saveFile($fileName);
+            } catch (\Exception) {
+                /*...*/
+                return false;
+            }
+        }
+
         /*...*/
         return true;
     }
