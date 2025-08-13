@@ -1,10 +1,10 @@
 <?php
 
-namespace Market;
+namespace Market\Product\Image;
 /**
  * Repository for Market's filesystem and static storage.
  */
-final class FileStorageRepository
+final class AwsS3StorageRepository implements StorageRepositoryInterface
 {
     /**
      * Returns image URL or null.
@@ -19,9 +19,6 @@ final class FileStorageRepository
 
     /**
      * Returns whether file exists or not.
-     *
-     * @param string $fileName
-     * @return bool
      */
     public function fileExists(string $fileName): bool
     {
@@ -30,9 +27,6 @@ final class FileStorageRepository
 
     /**
      * Deletes a file in the filesystem and throws an exception in case of errors.
-     *
-     * @param string $fileName
-     * @return void
      */
     public function deleteFile(string $fileName): void
     {
@@ -41,9 +35,6 @@ final class FileStorageRepository
 
     /**
      * Saves a file in the filesystem and throws an exception in case of errors.
-     *
-     * @param string $fileName
-     * @return void
      */
     public function saveFile(string $fileName): void
     {

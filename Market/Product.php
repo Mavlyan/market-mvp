@@ -1,25 +1,24 @@
 <?php
+
 namespace Market;
+use \Market\Product\ImageRepository;
+
 /**
  * Represents a single product record stored in DB.
  */
 class Product
 {
-    private FileStorageRepository $storage;
+    private ImageRepository $storage;
 
     private string $imageFileName;
-    /**
-     * @param FileStorageRepository $fileStorageRepository
-     */
-    public function __construct(FileStorageRepository $fileStorageRepository)
+
+    public function __construct(ImageRepository $fileStorageRepository)
     {
         $this->storage = $fileStorageRepository;
     }
-    /*...*/
+
     /**
      * Returns product image URL.
-     *
-     * @return string|null
      */
     public function getImageUrl(): ?string
     {
@@ -28,10 +27,9 @@ class Product
         }
         return $this->storage->getUrl($this->imageFileName);
     }
+
     /**
      * Returns whether image was successfully updated or not.
-     *
-     * @return bool
      */
     public function updateImage(): bool
     {
