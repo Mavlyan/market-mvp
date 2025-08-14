@@ -2,6 +2,7 @@ version: '3'
 services:
   phpfpm:
     image: markoshust/magento-php:7.4-fpm-2
+    container_name: app-php
     volumes:
       - ./:/var/www
     networks:
